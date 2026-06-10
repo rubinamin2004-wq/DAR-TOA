@@ -26,30 +26,23 @@ import streamlit as st
 
 st.set_page_config(initial_sidebar_state="expanded")
 
-# Hide the upper-right menu items and GitHub icon
+# Target only the action buttons, keeping page navigation intact
 st.markdown(
     """
     <style>
-    /* Hides the entire top header bar including Share, Star, and GitHub buttons */
-    header[data-testid="stHeader"] {
-        visibility: hidden;
-        height: 0%;
+    /* Hides the Share, Star, Edit, and GitHub buttons cluster */
+    div[data-testid="stElementToolbar"] {
+        display: none !important;
     }
     
-    /* Optional: Hides the main menu three-dot icon specifically if header is kept */
+    /* Hides the three-dot Main Menu if you want it gone too */
     #MainMenu {
-        visibility: hidden;
-    }
-    
-    /* Optional: Hides the "Deploy" or header buttons if they still render */
-    div[data-testid="stToolbar"] {
         visibility: hidden;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
-
 
 st.markdown("""
 <style>
