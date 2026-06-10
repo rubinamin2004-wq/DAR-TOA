@@ -24,25 +24,35 @@ st.set_page_config(
 
 import streamlit as st
 
+# Ensure configuration is initialized first
 st.set_page_config(initial_sidebar_state="expanded")
 
-# Target only the action buttons, keeping page navigation intact
+# Target modern Streamlit toolbar wrappers securely
 st.markdown(
     """
     <style>
-    /* Hides the Share, Star, Edit, and GitHub buttons cluster */
-    div[data-testid="stElementToolbar"] {
+    /* Hides the entire GitHub, Star, Edit, Share connection wrapper container */
+    [data-testid="stAppDeployButton"], 
+    [data-testid="stConnectionStatus"],
+    .stAppHeader > div:nth-child(2) {
         display: none !important;
+        visibility: hidden !important;
     }
     
-    /* Hides the three-dot Main Menu if you want it gone too */
-    #MainMenu {
-        visibility: hidden;
+    /* Targets the inner custom button bar container if it attempts to render */
+    div[class*="stElementToolbar"], div[class*="stToolbar"] {
+        display: none !important;
+    }
+
+    /* Keeps your structural header element sizing but ensures contents disappear */
+    header[data-testid="stHeader"] {
+        background-color: transparent !important;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 st.markdown("""
 <style>
