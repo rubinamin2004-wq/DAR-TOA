@@ -21,6 +21,33 @@ st.set_page_config(
 # ─────────────────────────────────────────────────────────────────────
 # THEME / CSS
 # ─────────────────────────────────────────────────────────────────────
+
+import streamlit as st
+
+# Hide the upper-right menu items and GitHub icon
+st.markdown(
+    """
+    <style>
+    /* Hides the entire top header bar including Share, Star, and GitHub buttons */
+    header[data-testid="stHeader"] {
+        visibility: hidden;
+        height: 0%;
+    }
+    
+    /* Optional: Hides the main menu three-dot icon specifically if header is kept */
+    #MainMenu {
+        visibility: hidden;
+    }
+    
+    /* Optional: Hides the "Deploy" or header buttons if they still render */
+    div[data-testid="stToolbar"] {
+        visibility: hidden;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.markdown("""
 <style>
 /* ── Google Font ── */
