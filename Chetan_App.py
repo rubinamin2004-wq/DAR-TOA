@@ -323,7 +323,7 @@ hr { border: none !important; border-top: 1px solid var(--border) !important; ma
 # ─────────────────────────────────────────────────────────────────────
 DATA_FILE    = "dar_data.json"
 ADMIN_MEMBER = "Chetan"
-DIRECTORS    = ["Aditya Sir", "Parish Sir"]
+DIRECTORS    = ["Aditya Sir", "Parish Sir","Both"]
 STATUS_OPTIONS = ["In Progress", "Submitted", "Pending", "Leave", "Holiday", "Correction"]
 
 STATUS_COLORS = {
