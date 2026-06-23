@@ -350,14 +350,54 @@ h1, h2, h3, h4, h5, h6 {
 }
 [data-testid="stAlert"] * { color: #f0f0f5 !important; }
 
-[data-baseweb="calendar"] { background-color: #252836 !important; color: #f0f0f5 !important; }
-[data-baseweb="calendar"] * { background-color: #252836 !important; color: #f0f0f5 !important; }
+/* ── Date picker calendar — white background, black text ── */
+[data-baseweb="calendar"] {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
+}
+[data-baseweb="calendar"] * {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+}
+[data-baseweb="calendar"] [aria-selected="true"],
+[data-baseweb="calendar"] [data-selected="true"] {
+    background-color: #6c63ff !important;
+    color: #ffffff !important;
+    border-radius: 50% !important;
+}
+[data-baseweb="calendar"] [aria-selected="true"] *,
+[data-baseweb="calendar"] [data-selected="true"] * {
+    background-color: #6c63ff !important;
+    color: #ffffff !important;
+}
+[data-baseweb="calendar"] [data-today="true"] {
+    border: 1px solid #6c63ff !important;
+    border-radius: 50% !important;
+}
+[data-baseweb="calendar"] button:hover {
+    background-color: rgba(108,99,255,0.15) !important;
+    border-radius: 50% !important;
+}
 
+/* ── Time input — white background, black text ── */
 [data-testid="stTimeInput"] input {
-    background-color: #252836 !important;
-    color: #f0f0f5 !important;
-    border-color: rgba(108,99,255,0.2) !important;
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    border-color: rgba(108,99,255,0.3) !important;
     border-radius: 8px !important;
+}
+[data-testid="stTimeInput"] input::placeholder {
+    color: #888888 !important;
+}
+[data-baseweb="time-picker"] {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+}
+[data-baseweb="time-picker"] * {
+    background-color: #ffffff !important;
+    color: #111111 !important;
 }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
