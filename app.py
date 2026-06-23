@@ -11,6 +11,20 @@ from sheets import (
 #import sheets
 #st.write(sheets.debug_users_sheet())
 
+import streamlit as st
+
+# Hide the upper header bar
+st.markdown(
+    """
+    <style>
+    header[data-testid="stHeader"] {
+        display: none !important;
+    }
+    </style>
+    """,
+    unsafe_made_html=True
+)
+
 
 # ─── Page Config ───────────────────────────────────────────────────────────────
 st.set_page_config(
