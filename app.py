@@ -72,7 +72,9 @@ footer { visibility: hidden; }
     color: #f0f0f5 !important;
 }
 
-p, span, div, li, td, th, label { color: #f0f0f5 !important; }
+p, li, td, th { color: #f0f0f5 !important; }
+/* Note: span and div are intentionally excluded here to avoid overriding
+   widget internals like time/date pickers */
 h1, h2, h3, h4, h5, h6 {
     color: #f0f0f5 !important;
     font-family: 'Space Grotesk', sans-serif !important;
@@ -225,17 +227,30 @@ h1, h2, h3, h4, h5, h6 {
     caret-color: #f0f0f5 !important;
 }
 /* ── Time inputs — white bg, black text ── */
-.stTimeInput > div > div > input,
-.stTimeInput > div > div > div,
-.stTimeInput input,
-.stTimeInput [data-baseweb="input"] input,
+/* st.time_input renders as a select/dropdown internally */
+[data-testid="stTimeInput"] > div,
+[data-testid="stTimeInput"] > div > div,
+[data-testid="stTimeInput"] [data-baseweb="select"] > div,
+[data-testid="stTimeInput"] [data-baseweb="select"] > div > div,
+[data-testid="stTimeInput"] [data-baseweb="base-input"],
+[data-testid="stTimeInput"] [data-baseweb="base-input"] > div,
 [data-testid="stTimeInput"] input,
-[data-testid="stTimeInput"] div[data-baseweb="input"] input {
+[data-testid="stTimeInput"] [role="combobox"],
+[data-testid="stTimeInput"] [role="combobox"] > div,
+[data-testid="stTimeInput"] span,
+.stTimeInput [data-baseweb="select"] > div,
+.stTimeInput [data-baseweb="select"] > div > div {
     background-color: #ffffff !important;
     color: #111111 !important;
-    border-color: rgba(108,99,255,0.3) !important;
-    border-radius: 8px !important;
     caret-color: #111111 !important;
+}
+/* The visible text value inside the time dropdown */
+[data-testid="stTimeInput"] [data-baseweb="select"] [data-id="select"],
+[data-testid="stTimeInput"] [data-baseweb="select"] div[class*="ValueContainer"] *,
+[data-testid="stTimeInput"] [data-baseweb="select"] div[class*="singleValue"],
+[data-testid="stTimeInput"] [data-baseweb="select"] div[class*="placeholder"] {
+    color: #111111 !important;
+    background-color: #ffffff !important;
 }
 .stTextInput > div > div > input::placeholder,
 .stTextArea > div > div > textarea::placeholder { color: #6b6b80 !important; }
