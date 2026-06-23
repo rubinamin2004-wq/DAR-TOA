@@ -267,7 +267,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 [data-baseweb="popover"] * {
     background-color: #ffffff !important;
-    color: #111111 !important;
+    color:  !important;
 }
 [data-baseweb="menu"] {
     background-color: #ffffff !important;
@@ -372,7 +372,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
 }
 [data-baseweb="calendar"] * {
-    background-color: #ffffff !important;
+    background-color: !important;
     color: #111111 !important;
 }
 [data-baseweb="calendar"] [aria-selected="true"],
@@ -398,7 +398,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Time input — dark bg, black text only ── */
 [data-testid="stTimeInput"] input {
     background-color: #252836 !important;
-    color: #111111 !important;
+    color: ##ffffff !important;
     border-color: rgba(108,99,255,0.2) !important;
     border-radius: 8px !important;
 }
