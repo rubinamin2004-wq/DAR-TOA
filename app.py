@@ -710,14 +710,27 @@ def my_reports_page():
         return
 
     # Filters
+    import datetime
+
     with st.expander("🔍 Search & Filter", expanded=True):
         fc1, fc2, fc3 = st.columns(3)
         with fc1:
             search_project = st.text_input("Search by Project", placeholder="Project name...")
         with fc2:
-            search_date = st.date_input("Filter by Date", value=None)
-        with fc3:
-            status_filter = st.selectbox("Filter by Status", ["All"] + ["In Progress", "Submitted", "Pending", "Leave", "Holiday", "Correction"])
+            # 1. Create a dictionary of month names and numbers
+            months = {
+                "All Months": None, "January": 1, "February": 2, "March": 3, 
+                "April": 4, "May": 5, "June": 6, "July": 7, 
+                "August": 8, "September": 9, "October": 10, "November": 11, "December": 12
+            }
+        
+        # 2. Let the user choose the month
+        selected_month_name = st.selectbox("Filter by Month", list(months.keys()))
+        search_month = months[selected_month_name]
+        
+    with fc3:
+        status_filter = st.selectbox("Filter by Status", ["All"] + ["In Progress", "Submitted", "Pending", "Leave", "Holiday", "Correction"])
+
 
     filtered = reports_df.copy()
     if search_project:
