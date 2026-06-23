@@ -226,18 +226,10 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 8px !important;
     caret-color: #f0f0f5 !important;
 }
-/* ── Time inputs — keep dark bg, force black text for visibility ── */
-[data-testid="stTimeInput"] [data-baseweb="select"] > div,
-[data-testid="stTimeInput"] [data-baseweb="select"] > div > div {
-    background-color: #252836 !important;
+/* ── Time inputs — white box, black text ── */
+[data-testid="stTimeInput"] [data-baseweb="select"] > div {
+    background-color: #ffffff !important;
     color: #111111 !important;
-}
-[data-testid="stTimeInput"] [data-baseweb="select"] div[class*="singleValue"],
-[data-testid="stTimeInput"] [data-baseweb="select"] div[class*="ValueContainer"] *,
-[data-testid="stTimeInput"] [data-baseweb="select"] div[class*="placeholder"],
-[data-testid="stTimeInput"] [role="combobox"] *,
-[data-testid="stTimeInput"] span {
-    color: #ffffff !important;
 }
 .stTextInput > div > div > input::placeholder,
 .stTextArea > div > div > textarea::placeholder { color: #6b6b80 !important; }
@@ -267,7 +259,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 [data-baseweb="popover"] * {
     background-color: #ffffff !important;
-    color:  !important;
+    color: #111111 !important;
 }
 [data-baseweb="menu"] {
     background-color: #ffffff !important;
@@ -372,7 +364,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
 }
 [data-baseweb="calendar"] * {
-    background-color: !important;
+    background-color: #ffffff !important;
     color: #111111 !important;
 }
 [data-baseweb="calendar"] [aria-selected="true"],
@@ -395,11 +387,11 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 50% !important;
 }
 
-/* ── Time input — dark bg, black text only ── */
+/* ── Time input — white box, black text ── */
 [data-testid="stTimeInput"] input {
-    background-color: #252836 !important;
-    color: ##ffffff !important;
-    border-color: rgba(108,99,255,0.2) !important;
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    border-color: rgba(108,99,255,0.3) !important;
     border-radius: 8px !important;
 }
 
