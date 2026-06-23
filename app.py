@@ -17,7 +17,6 @@ st.set_page_config(
 )
 
 # ─── Force theme independence ──────────────────────────────────────────────────
-# Inject meta + force light color-scheme so browser dark mode never interferes
 st.markdown("""
 <meta name="color-scheme" content="light only">
 <style>
@@ -37,40 +36,30 @@ header[data-testid="stHeader"] { display: none !important; }
 # ─── CSS ───────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-/* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-/* ── Force color-scheme independence ── */
-*, *::before, *::after {
-    color-scheme: light only !important;
-}
+*, *::before, *::after { color-scheme: light only !important; }
 
-/* ── Global reset with explicit colors ── */
 html, body {
     background-color: #0f1117 !important;
     color: #f0f0f5 !important;
     font-family: 'Inter', sans-serif !important;
 }
-
 .stApp {
     background-color: #0f1117 !important;
     color: #f0f0f5 !important;
     font-family: 'Inter', sans-serif !important;
 }
 
-/* Hide Streamlit chrome */
 #MainMenu { visibility: hidden; }
 footer { visibility: hidden; }
 .stDeployButton { display: none; }
 
-/* ── Sidebar ── */
 [data-testid="stSidebar"] {
     background-color: #1a1d2e !important;
     border-right: 1px solid rgba(108,99,255,0.2) !important;
 }
-[data-testid="stSidebar"] * {
-    color: #f0f0f5 !important;
-}
+[data-testid="stSidebar"] * { color: #f0f0f5 !important; }
 [data-testid="stSidebar"] .stMarkdown h1,
 [data-testid="stSidebar"] .stMarkdown h2,
 [data-testid="stSidebar"] .stMarkdown h3 {
@@ -78,22 +67,17 @@ footer { visibility: hidden; }
     font-family: 'Space Grotesk', sans-serif !important;
 }
 
-/* ── Main content area ── */
 .main .block-container {
     background-color: #0f1117 !important;
     color: #f0f0f5 !important;
 }
 
-/* ── All text elements ── */
-p, span, div, li, td, th, label {
-    color: #f0f0f5 !important;
-}
+p, span, div, li, td, th, label { color: #f0f0f5 !important; }
 h1, h2, h3, h4, h5, h6 {
     color: #f0f0f5 !important;
     font-family: 'Space Grotesk', sans-serif !important;
 }
 
-/* ── Cards ── */
 .dar-card {
     background-color: #1a1d2e !important;
     border: 1px solid rgba(108,99,255,0.2) !important;
@@ -110,7 +94,6 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 0 20px rgba(108,99,255,0.15) !important;
 }
 
-/* ── Metric grid ── */
 .metric-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -142,7 +125,6 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.08em !important;
 }
 
-/* ── Page header ── */
 .page-header {
     margin-bottom: 28px !important;
     padding-bottom: 20px !important;
@@ -161,7 +143,6 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 !important;
 }
 
-/* ── Status badges ── */
 .badge {
     display: inline-block !important;
     padding: 3px 10px !important;
@@ -177,7 +158,6 @@ h1, h2, h3, h4, h5, h6 {
 .badge-holiday   { background-color: rgba(236,72,153,0.15) !important;  color: #ec4899 !important; }
 .badge-correction{ background-color: rgba(239,68,68,0.15)  !important;  color: #ef4444 !important; }
 
-/* ── Login ── */
 .login-wrapper { max-width: 420px; margin: 60px auto 0; }
 .login-logo { text-align: center; margin-bottom: 36px; }
 .login-logo-icon { font-size: 3rem; display: block; margin-bottom: 12px; }
@@ -189,7 +169,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .login-logo-sub { font-size: 0.85rem !important; color: #9b9bb4 !important; margin-top: 4px !important; }
 
-/* ── Alert boxes ── */
 .alert-success {
     background-color: rgba(34,197,94,0.1) !important;
     border: 1px solid rgba(34,197,94,0.3) !important;
@@ -209,7 +188,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 16px !important;
 }
 
-/* ── Sidebar nav user info ── */
 .nav-user-info {
     background-color: rgba(108,99,255,0.15) !important;
     border: 1px solid rgba(108,99,255,0.2) !important;
@@ -231,14 +209,12 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.06em !important;
 }
 
-/* ── Section divider ── */
 .section-divider {
     height: 1px !important;
     background-color: rgba(108,99,255,0.2) !important;
     margin: 24px 0 !important;
 }
 
-/* ── Streamlit form inputs ── */
 .stTextInput > div > div > input,
 .stTextArea > div > div > textarea,
 .stDateInput > div > div > input,
@@ -250,9 +226,7 @@ h1, h2, h3, h4, h5, h6 {
     caret-color: #f0f0f5 !important;
 }
 .stTextInput > div > div > input::placeholder,
-.stTextArea > div > div > textarea::placeholder {
-    color: #6b6b80 !important;
-}
+.stTextArea > div > div > textarea::placeholder { color: #6b6b80 !important; }
 .stTextInput > div > div > input:focus,
 .stTextArea > div > div > textarea:focus,
 .stDateInput > div > div > input:focus {
@@ -261,7 +235,6 @@ h1, h2, h3, h4, h5, h6 {
     outline: none !important;
 }
 
-/* ── Selectbox ── */
 .stSelectbox > div > div {
     background-color: #252836 !important;
     border-color: rgba(108,99,255,0.2) !important;
@@ -272,22 +245,11 @@ h1, h2, h3, h4, h5, h6 {
     color: #f0f0f5 !important;
     background-color: #252836 !important;
 }
-/* Selectbox dropdown options */
-[data-baseweb="select"] * {
-    background-color: #252836 !important;
-    color: #f0f0f5 !important;
-}
-[data-baseweb="popover"] {
-    background-color: #252836 !important;
-}
-[data-baseweb="menu"] {
-    background-color: #252836 !important;
-}
-[data-baseweb="option"]:hover {
-    background-color: rgba(108,99,255,0.2) !important;
-}
+[data-baseweb="select"] * { background-color: #252836 !important; color: #f0f0f5 !important; }
+[data-baseweb="popover"] { background-color: #252836 !important; }
+[data-baseweb="menu"] { background-color: #252836 !important; }
+[data-baseweb="option"]:hover { background-color: rgba(108,99,255,0.2) !important; }
 
-/* ── Labels ── */
 .stTextInput > label,
 .stSelectbox > label,
 .stTextArea > label,
@@ -299,7 +261,6 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500 !important;
 }
 
-/* ── Buttons ── */
 .stButton > button {
     background-color: #6c63ff !important;
     color: #ffffff !important;
@@ -324,7 +285,6 @@ h1, h2, h3, h4, h5, h6 {
     border-color: #6c63ff !important;
 }
 
-/* ── Form submit button ── */
 .stFormSubmitButton > button {
     background-color: #6c63ff !important;
     color: #ffffff !important;
@@ -332,11 +292,8 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 8px !important;
     font-weight: 600 !important;
 }
-.stFormSubmitButton > button:hover {
-    background-color: #8b85ff !important;
-}
+.stFormSubmitButton > button:hover { background-color: #8b85ff !important; }
 
-/* ── Expander ── */
 .streamlit-expanderHeader,
 [data-testid="stExpander"] > div:first-child {
     background-color: #1a1d2e !important;
@@ -349,51 +306,28 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid rgba(108,99,255,0.2) !important;
     border-radius: 8px !important;
 }
-[data-testid="stExpander"] * {
-    color: #f0f0f5 !important;
-}
+[data-testid="stExpander"] * { color: #f0f0f5 !important; }
 
-/* ── Dataframe / Table ── */
-.stDataFrame {
-    border-radius: 8px !important;
-    overflow: hidden !important;
-}
-[data-testid="stDataFrame"] * {
-    background-color: #1a1d2e !important;
-    color: #f0f0f5 !important;
-}
-.dataframe th {
-    background-color: #252836 !important;
-    color: #9b9bb4 !important;
-}
+.stDataFrame { border-radius: 8px !important; overflow: hidden !important; }
+[data-testid="stDataFrame"] * { background-color: #1a1d2e !important; color: #f0f0f5 !important; }
+.dataframe th { background-color: #252836 !important; color: #9b9bb4 !important; }
 .dataframe td {
     background-color: #1a1d2e !important;
     color: #f0f0f5 !important;
     border-color: rgba(108,99,255,0.1) !important;
 }
 
-/* ── Info / Warning / Error native boxes ── */
 [data-testid="stAlert"] {
     background-color: rgba(59,130,246,0.1) !important;
     border: 1px solid rgba(59,130,246,0.3) !important;
     border-radius: 8px !important;
     color: #f0f0f5 !important;
 }
-[data-testid="stAlert"] * {
-    color: #f0f0f5 !important;
-}
+[data-testid="stAlert"] * { color: #f0f0f5 !important; }
 
-/* ── Date picker calendar popup ── */
-[data-baseweb="calendar"] {
-    background-color: #252836 !important;
-    color: #f0f0f5 !important;
-}
-[data-baseweb="calendar"] * {
-    background-color: #252836 !important;
-    color: #f0f0f5 !important;
-}
+[data-baseweb="calendar"] { background-color: #252836 !important; color: #f0f0f5 !important; }
+[data-baseweb="calendar"] * { background-color: #252836 !important; color: #f0f0f5 !important; }
 
-/* ── Time picker ── */
 [data-testid="stTimeInput"] input {
     background-color: #252836 !important;
     color: #f0f0f5 !important;
@@ -401,19 +335,13 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 8px !important;
 }
 
-/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background-color: #0f1117 !important; }
 ::-webkit-scrollbar-thumb { background-color: rgba(108,99,255,0.4) !important; border-radius: 3px !important; }
 ::-webkit-scrollbar-thumb:hover { background-color: #6c63ff !important; }
 
-/* ── Markdown inside containers ── */
-.stMarkdown, .stMarkdown p, .stMarkdown span {
-    color: #f0f0f5 !important;
-}
-.stMarkdown strong {
-    color: #f0f0f5 !important;
-}
+.stMarkdown, .stMarkdown p, .stMarkdown span { color: #f0f0f5 !important; }
+.stMarkdown strong { color: #f0f0f5 !important; }
 code {
     background-color: #252836 !important;
     color: #8b85ff !important;
@@ -421,11 +349,7 @@ code {
     padding: 2px 6px !important;
 }
 
-/* ── Tab / multiselect if used ── */
-[data-baseweb="tab"] {
-    background-color: #1a1d2e !important;
-    color: #9b9bb4 !important;
-}
+[data-baseweb="tab"] { background-color: #1a1d2e !important; color: #9b9bb4 !important; }
 [data-baseweb="tab"][aria-selected="true"] {
     color: #8b85ff !important;
     border-bottom-color: #6c63ff !important;
@@ -544,10 +468,19 @@ def render_sidebar():
         st.markdown("**Navigation**")
 
         is_admin = st.session_state.role == "Admin"
-        pages = [("📊 Dashboard", "dashboard"), ("📝 Submit Report", "submit"), ("📁 My Reports", "my_reports")]
+
+        # ── Build nav: Change Password is Admin-only ──
+        pages = [
+            ("📊 Dashboard", "dashboard"),
+            ("📝 Submit Report", "submit"),
+            ("📁 My Reports", "my_reports"),
+        ]
         if is_admin:
-            pages += [("🗂️ All Reports", "all_reports"), ("👥 Manage Users", "manage_users")]
-        pages += [("🔑 Change Password", "change_password")]
+            pages += [
+                ("🗂️ All Reports", "all_reports"),
+                ("👥 Manage Users", "manage_users"),
+                ("🔑 Change Password", "change_password"),   # Admin only
+            ]
 
         for label, key in pages:
             active = st.session_state.page == key
@@ -1070,7 +1003,46 @@ def manage_users_page():
         st.markdown('<div class="section-divider" style="margin:8px 0"></div>', unsafe_allow_html=True)
 
 
-# ─── Change Password ──────────────────────────────────────────────────────────
+# ─── Change Password (Admin only) ─────────────────────────────────────────────
+def change_password_page():
+    # Double-guard: redirect non-admins away even if they navigate directly
+    if st.session_state.role != "Admin":
+        st.error("Access denied: this page is for administrators only.")
+        if st.button("← Back to Dashboard"):
+            nav_to("dashboard")
+        return
+
+    st.markdown("""
+    <div class="page-header">
+        <div class="page-title">🔑 Change Password</div>
+        <div class="page-subtitle">Update your admin account password</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    show_message()
+
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        with st.form("change_pw"):
+            current_pw = st.text_input("Current Password", type="password")
+            new_pw = st.text_input("New Password", type="password")
+            confirm_pw = st.text_input("Confirm New Password", type="password")
+            submit = st.form_submit_button("Update Password", use_container_width=True)
+
+        if submit:
+            auth = authenticate_user(st.session_state.username, current_pw)
+            if not auth:
+                set_message("Current password is incorrect.", "error")
+            elif not new_pw:
+                set_message("New password cannot be empty.", "error")
+            elif new_pw != confirm_pw:
+                set_message("New passwords do not match.", "error")
+            else:
+                ok = update_password(st.session_state.username, new_pw)
+                set_message("✅ Password updated successfully!" if ok else "Failed to update password.",
+                            "success" if ok else "error")
+            st.rerun()
+
 
 # ─── Main Router ──────────────────────────────────────────────────────────────
 def main():
@@ -1095,7 +1067,7 @@ def main():
         all_reports_page()
     elif page == "manage_users" and is_admin:
         manage_users_page()
-    elif page == "change_password":
+    elif page == "change_password" and is_admin:   # Admin-only route guard
         change_password_page()
     else:
         dashboard_page()
