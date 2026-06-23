@@ -235,6 +235,7 @@ h1, h2, h3, h4, h5, h6 {
     outline: none !important;
 }
 
+/* ── Selectbox trigger (closed state) — keep dark ── */
 .stSelectbox > div > div {
     background-color: #252836 !important;
     border-color: rgba(108,99,255,0.2) !important;
@@ -245,10 +246,34 @@ h1, h2, h3, h4, h5, h6 {
     color: #f0f0f5 !important;
     background-color: #252836 !important;
 }
-[data-baseweb="select"] * { background-color: #252836 !important; color: #f0f0f5 !important; }
-[data-baseweb="popover"] { background-color: #252836 !important; }
-[data-baseweb="menu"] { background-color: #252836 !important; }
-[data-baseweb="option"]:hover { background-color: rgba(108,99,255,0.2) !important; }
+
+/* ── Dropdown popover / menu — white background, black text ── */
+[data-baseweb="popover"] {
+    background-color: #ffffff !important;
+}
+[data-baseweb="popover"] * {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+}
+[data-baseweb="menu"] {
+    background-color: #ffffff !important;
+    border: 1px solid rgba(108,99,255,0.3) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15) !important;
+}
+[data-baseweb="menu"] * {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+}
+[data-baseweb="option"] {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+}
+[data-baseweb="option"]:hover,
+[data-baseweb="option"][aria-selected="true"] {
+    background-color: rgba(108,99,255,0.1) !important;
+    color: #111111 !important;
+}
 
 .stTextInput > label,
 .stSelectbox > label,
