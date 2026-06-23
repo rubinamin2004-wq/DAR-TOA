@@ -1071,41 +1071,6 @@ def manage_users_page():
 
 
 # ─── Change Password ──────────────────────────────────────────────────────────
-'''
-def change_password_page():
-    st.markdown("""
-    <div class="page-header">
-        <div class="page-title">🔑 Change Password</div>
-        <div class="page-subtitle">Update your account password</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    show_message()
-
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        with st.form("change_pw"):
-            current_pw = st.text_input("Current Password", type="password")
-            new_pw = st.text_input("New Password", type="password")
-            confirm_pw = st.text_input("Confirm New Password", type="password")
-            submit = st.form_submit_button("Update Password", use_container_width=True)
-
-        if submit:
-            auth = authenticate_user(st.session_state.username, current_pw)
-            if not auth:
-                set_message("Current password is incorrect.", "error")
-            elif not new_pw:
-                set_message("New password cannot be empty.", "error")
-            elif new_pw != confirm_pw:
-                set_message("New passwords do not match.", "error")
-            else:
-                ok = update_password(st.session_state.username, new_pw)
-                set_message("✅ Password updated successfully!" if ok else "Failed to update password.",
-                            "success" if ok else "error")
-            st.rerun()
-
-            '''
-
 
 # ─── Main Router ──────────────────────────────────────────────────────────────
 def main():
