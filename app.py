@@ -16,104 +16,284 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ─── Hide Streamlit header ─────────────────────────────────────────────────────
-st.markdown(
-    """
-    <style>
-    header[data-testid="stHeader"] { display: none !important; }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# ─── Force theme independence ──────────────────────────────────────────────────
+# Inject meta + force light color-scheme so browser dark mode never interferes
+st.markdown("""
+<meta name="color-scheme" content="light only">
+<style>
+:root, html, body, .stApp {
+    color-scheme: light only !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
-# ─── CSS (theme-independent: all colors are explicit, no CSS vars) ─────────────
+# Hide Streamlit header
 st.markdown("""
 <style>
+header[data-testid="stHeader"] { display: none !important; }
+</style>
+""", unsafe_allow_html=True)
+
+# ─── CSS ───────────────────────────────────────────────────────────────────────
+st.markdown("""
+<style>
+/* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-/* ── Force the entire app background and text ── */
-.stApp,
-.stApp > div,
-section[data-testid="stSidebarContent"],
-[data-testid="stSidebar"] {
+/* ── Force color-scheme independence ── */
+*, *::before, *::after {
+    color-scheme: light only !important;
+}
+
+/* ── Global reset with explicit colors ── */
+html, body {
     background-color: #0f1117 !important;
     color: #f0f0f5 !important;
     font-family: 'Inter', sans-serif !important;
 }
 
-/* ── Sidebar ── */
-[data-testid="stSidebar"] {
-    border-right: 1px solid rgba(108,99,255,0.2) !important;
+.stApp {
+    background-color: #0f1117 !important;
+    color: #f0f0f5 !important;
+    font-family: 'Inter', sans-serif !important;
 }
 
-/* ── Hide Streamlit chrome ── */
+/* Hide Streamlit chrome */
 #MainMenu { visibility: hidden; }
-footer    { visibility: hidden; }
+footer { visibility: hidden; }
 .stDeployButton { display: none; }
 
-/* ── All text inside app ── */
-.stApp p,
-.stApp span,
-.stApp label,
-.stApp div,
-.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5 {
+/* ── Sidebar ── */
+[data-testid="stSidebar"] {
+    background-color: #1a1d2e !important;
+    border-right: 1px solid rgba(108,99,255,0.2) !important;
+}
+[data-testid="stSidebar"] * {
     color: #f0f0f5 !important;
-    font-family: 'Inter', sans-serif !important;
+}
+[data-testid="stSidebar"] .stMarkdown h1,
+[data-testid="stSidebar"] .stMarkdown h2,
+[data-testid="stSidebar"] .stMarkdown h3 {
+    color: #f0f0f5 !important;
+    font-family: 'Space Grotesk', sans-serif !important;
 }
 
-/* ── Markdown labels ── */
-.stMarkdown p { color: #f0f0f5 !important; }
+/* ── Main content area ── */
+.main .block-container {
+    background-color: #0f1117 !important;
+    color: #f0f0f5 !important;
+}
 
-/* ── Input fields ── */
-.stTextInput  > div > div > input,
-.stTextArea   > div > div > textarea,
-.stDateInput  > div > div > input,
-.stTimeInput  > div > div > input {
+/* ── All text elements ── */
+p, span, div, li, td, th, label {
+    color: #f0f0f5 !important;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #f0f0f5 !important;
+    font-family: 'Space Grotesk', sans-serif !important;
+}
+
+/* ── Cards ── */
+.dar-card {
+    background-color: #1a1d2e !important;
+    border: 1px solid rgba(108,99,255,0.2) !important;
+    border-radius: 12px !important;
+    padding: 24px !important;
+    margin-bottom: 16px !important;
+}
+.dar-card-glow {
+    background-color: #1a1d2e !important;
+    border: 1px solid #6c63ff !important;
+    border-radius: 12px !important;
+    padding: 24px !important;
+    margin-bottom: 16px !important;
+    box-shadow: 0 0 20px rgba(108,99,255,0.15) !important;
+}
+
+/* ── Metric grid ── */
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.metric-card {
+    background-color: #1a1d2e !important;
+    border: 1px solid rgba(108,99,255,0.2) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    text-align: center !important;
+    transition: border-color 0.2s !important;
+}
+.metric-card:hover { border-color: #6c63ff !important; }
+.metric-value {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 2.2rem !important;
+    font-weight: 700 !important;
+    color: #8b85ff !important;
+    line-height: 1 !important;
+    margin-bottom: 6px !important;
+}
+.metric-label {
+    font-size: 0.78rem !important;
+    font-weight: 500 !important;
+    color: #9b9bb4 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+}
+
+/* ── Page header ── */
+.page-header {
+    margin-bottom: 28px !important;
+    padding-bottom: 20px !important;
+    border-bottom: 1px solid rgba(108,99,255,0.2) !important;
+}
+.page-title {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 1.9rem !important;
+    font-weight: 700 !important;
+    color: #f0f0f5 !important;
+    margin: 0 0 4px 0 !important;
+}
+.page-subtitle {
+    font-size: 0.9rem !important;
+    color: #9b9bb4 !important;
+    margin: 0 !important;
+}
+
+/* ── Status badges ── */
+.badge {
+    display: inline-block !important;
+    padding: 3px 10px !important;
+    border-radius: 20px !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+}
+.badge-submitted { background-color: rgba(34,197,94,0.15) !important;  color: #22c55e !important; }
+.badge-progress  { background-color: rgba(59,130,246,0.15) !important;  color: #3b82f6 !important; }
+.badge-pending   { background-color: rgba(245,158,11,0.15) !important;  color: #f59e0b !important; }
+.badge-leave     { background-color: rgba(168,85,247,0.15) !important;  color: #a855f7 !important; }
+.badge-holiday   { background-color: rgba(236,72,153,0.15) !important;  color: #ec4899 !important; }
+.badge-correction{ background-color: rgba(239,68,68,0.15)  !important;  color: #ef4444 !important; }
+
+/* ── Login ── */
+.login-wrapper { max-width: 420px; margin: 60px auto 0; }
+.login-logo { text-align: center; margin-bottom: 36px; }
+.login-logo-icon { font-size: 3rem; display: block; margin-bottom: 12px; }
+.login-logo-title {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 1.7rem !important;
+    font-weight: 700 !important;
+    color: #f0f0f5 !important;
+}
+.login-logo-sub { font-size: 0.85rem !important; color: #9b9bb4 !important; margin-top: 4px !important; }
+
+/* ── Alert boxes ── */
+.alert-success {
+    background-color: rgba(34,197,94,0.1) !important;
+    border: 1px solid rgba(34,197,94,0.3) !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+    color: #22c55e !important;
+    font-size: 0.875rem !important;
+    margin-bottom: 16px !important;
+}
+.alert-error {
+    background-color: rgba(239,68,68,0.1) !important;
+    border: 1px solid rgba(239,68,68,0.3) !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+    color: #ef4444 !important;
+    font-size: 0.875rem !important;
+    margin-bottom: 16px !important;
+}
+
+/* ── Sidebar nav user info ── */
+.nav-user-info {
+    background-color: rgba(108,99,255,0.15) !important;
+    border: 1px solid rgba(108,99,255,0.2) !important;
+    border-radius: 10px !important;
+    padding: 14px 16px !important;
+    margin-bottom: 20px !important;
+}
+.nav-username {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-weight: 600 !important;
+    color: #f0f0f5 !important;
+    font-size: 1rem !important;
+}
+.nav-role {
+    font-size: 0.75rem !important;
+    color: #8b85ff !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+}
+
+/* ── Section divider ── */
+.section-divider {
+    height: 1px !important;
+    background-color: rgba(108,99,255,0.2) !important;
+    margin: 24px 0 !important;
+}
+
+/* ── Streamlit form inputs ── */
+.stTextInput > div > div > input,
+.stTextArea > div > div > textarea,
+.stDateInput > div > div > input,
+.stTimeInput > div > div > input {
     background-color: #252836 !important;
     color: #f0f0f5 !important;
-    border: 1px solid rgba(108,99,255,0.3) !important;
+    border-color: rgba(108,99,255,0.2) !important;
     border-radius: 8px !important;
-    font-family: 'Inter', sans-serif !important;
+    caret-color: #f0f0f5 !important;
 }
-
-/* Input placeholder */
-.stTextInput  > div > div > input::placeholder,
-.stTextArea   > div > div > textarea::placeholder {
+.stTextInput > div > div > input::placeholder,
+.stTextArea > div > div > textarea::placeholder {
     color: #6b6b80 !important;
+}
+.stTextInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus,
+.stDateInput > div > div > input:focus {
+    border-color: #6c63ff !important;
+    box-shadow: 0 0 0 2px rgba(108,99,255,0.2) !important;
+    outline: none !important;
 }
 
 /* ── Selectbox ── */
 .stSelectbox > div > div {
     background-color: #252836 !important;
-    border: 1px solid rgba(108,99,255,0.3) !important;
+    border-color: rgba(108,99,255,0.2) !important;
     border-radius: 8px !important;
     color: #f0f0f5 !important;
 }
-.stSelectbox svg { fill: #9b9bb4 !important; }
-
-/* Selectbox dropdown options */
-[data-baseweb="select"] [role="listbox"],
-[data-baseweb="popover"] ul {
-    background-color: #1a1d2e !important;
-    border: 1px solid rgba(108,99,255,0.3) !important;
+.stSelectbox > div > div > div {
+    color: #f0f0f5 !important;
+    background-color: #252836 !important;
 }
-[data-baseweb="select"] [role="option"],
-[data-baseweb="popover"] li {
-    background-color: #1a1d2e !important;
+/* Selectbox dropdown options */
+[data-baseweb="select"] * {
+    background-color: #252836 !important;
     color: #f0f0f5 !important;
 }
-[data-baseweb="select"] [role="option"]:hover,
-[data-baseweb="popover"] li:hover {
+[data-baseweb="popover"] {
     background-color: #252836 !important;
+}
+[data-baseweb="menu"] {
+    background-color: #252836 !important;
+}
+[data-baseweb="option"]:hover {
+    background-color: rgba(108,99,255,0.2) !important;
 }
 
 /* ── Labels ── */
-.stTextInput  > label,
-.stSelectbox  > label,
-.stTextArea   > label,
-.stDateInput  > label,
-.stTimeInput  > label,
-.stCheckbox   > label {
+.stTextInput > label,
+.stSelectbox > label,
+.stTextArea > label,
+.stDateInput > label,
+.stTimeInput > label,
+.stCheckbox > label {
     color: #9b9bb4 !important;
     font-size: 0.85rem !important;
     font-weight: 500 !important;
@@ -128,7 +308,7 @@ footer    { visibility: hidden; }
     font-weight: 600 !important;
     font-family: 'Inter', sans-serif !important;
     padding: 8px 20px !important;
-    transition: background-color 0.2s, box-shadow 0.2s !important;
+    transition: all 0.2s !important;
 }
 .stButton > button:hover {
     background-color: #8b85ff !important;
@@ -140,7 +320,8 @@ footer    { visibility: hidden; }
     color: #f0f0f5 !important;
 }
 .stButton > button[kind="secondary"]:hover {
-    background-color: #2e3147 !important;
+    background-color: #2e3248 !important;
+    border-color: #6c63ff !important;
 }
 
 /* ── Form submit button ── */
@@ -150,8 +331,6 @@ footer    { visibility: hidden; }
     border: none !important;
     border-radius: 8px !important;
     font-weight: 600 !important;
-    font-family: 'Inter', sans-serif !important;
-    width: 100% !important;
 }
 .stFormSubmitButton > button:hover {
     background-color: #8b85ff !important;
@@ -166,166 +345,91 @@ footer    { visibility: hidden; }
     color: #f0f0f5 !important;
 }
 [data-testid="stExpander"] {
+    background-color: #1a1d2e !important;
     border: 1px solid rgba(108,99,255,0.2) !important;
     border-radius: 8px !important;
-    background-color: #1a1d2e !important;
 }
-
-/* ── Dataframe / table ── */
-.stDataFrame,
-[data-testid="stDataFrame"] {
-    background-color: #1a1d2e !important;
-    border-radius: 8px !important;
-}
-[data-testid="stDataFrame"] th {
-    background-color: #252836 !important;
-    color: #9b9bb4 !important;
-}
-[data-testid="stDataFrame"] td {
-    background-color: #1a1d2e !important;
+[data-testid="stExpander"] * {
     color: #f0f0f5 !important;
 }
 
-/* ── Info / success / error boxes ── */
-[data-testid="stAlert"] {
+/* ── Dataframe / Table ── */
+.stDataFrame {
     border-radius: 8px !important;
-    font-family: 'Inter', sans-serif !important;
+    overflow: hidden !important;
 }
-
-/* ── Divider ── */
-hr { border-color: rgba(108,99,255,0.2) !important; }
-
-/* ── Custom component classes ── */
-.dar-card {
-    background: #1a1d2e;
-    border: 1px solid rgba(108,99,255,0.2);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 16px;
-}
-.dar-card-glow {
-    background: #1a1d2e;
-    border: 1px solid #6c63ff;
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 16px;
-    box-shadow: 0 0 20px rgba(108,99,255,0.15);
-}
-.metric-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
-}
-.metric-card {
-    background: #1a1d2e;
-    border: 1px solid rgba(108,99,255,0.2);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    transition: border-color 0.2s;
-}
-.metric-card:hover { border-color: #6c63ff; }
-.metric-value {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #8b85ff;
-    line-height: 1;
-    margin-bottom: 6px;
-}
-.metric-label {
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: #9b9bb4;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-.page-header {
-    margin-bottom: 28px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(108,99,255,0.2);
-}
-.page-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: #f0f0f5;
-    margin: 0 0 4px 0;
-}
-.page-subtitle {
-    font-size: 0.9rem;
-    color: #9b9bb4;
-    margin: 0;
-}
-.badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-}
-.badge-submitted { background: rgba(34,197,94,0.15);  color: #22c55e; }
-.badge-progress  { background: rgba(59,130,246,0.15);  color: #3b82f6; }
-.badge-pending   { background: rgba(245,158,11,0.15);  color: #f59e0b; }
-.badge-leave     { background: rgba(168,85,247,0.15);  color: #a855f7; }
-.badge-holiday   { background: rgba(236,72,153,0.15);  color: #ec4899; }
-.badge-correction{ background: rgba(239,68,68,0.15);   color: #ef4444; }
-.login-wrapper  { max-width: 420px; margin: 60px auto 0; }
-.login-logo     { text-align: center; margin-bottom: 36px; }
-.login-logo-icon  { font-size: 3rem; display: block; margin-bottom: 12px; }
-.login-logo-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.7rem; font-weight: 700; color: #f0f0f5;
-}
-.login-logo-sub { font-size: 0.85rem; color: #9b9bb4; margin-top: 4px; }
-.alert-success {
-    background: rgba(34,197,94,0.1);
-    border: 1px solid rgba(34,197,94,0.3);
-    border-radius: 8px; padding: 12px 16px;
-    color: #22c55e; font-size: 0.875rem; margin-bottom: 16px;
-}
-.alert-error {
-    background: rgba(239,68,68,0.1);
-    border: 1px solid rgba(239,68,68,0.3);
-    border-radius: 8px; padding: 12px 16px;
-    color: #ef4444; font-size: 0.875rem; margin-bottom: 16px;
-}
-.nav-user-info {
-    background: rgba(108,99,255,0.15);
-    border: 1px solid rgba(108,99,255,0.2);
-    border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
-}
-.nav-username {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600; color: #f0f0f5; font-size: 1rem;
-}
-.nav-role {
-    font-size: 0.75rem; color: #8b85ff;
-    font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em;
-}
-.section-divider { height: 1px; background: rgba(108,99,255,0.2); margin: 24px 0; }
-
-/* ── Date/time picker calendar popup ── */
-[data-baseweb="calendar"],
-[data-baseweb="datepicker"] {
+[data-testid="stDataFrame"] * {
     background-color: #1a1d2e !important;
-    border: 1px solid rgba(108,99,255,0.3) !important;
+    color: #f0f0f5 !important;
 }
-[data-baseweb="calendar"] * { color: #f0f0f5 !important; }
-[data-baseweb="calendar"] [aria-selected="true"] {
-    background-color: #6c63ff !important;
-}
-[data-baseweb="calendar"] button:hover {
+.dataframe th {
     background-color: #252836 !important;
+    color: #9b9bb4 !important;
+}
+.dataframe td {
+    background-color: #1a1d2e !important;
+    color: #f0f0f5 !important;
+    border-color: rgba(108,99,255,0.1) !important;
+}
+
+/* ── Info / Warning / Error native boxes ── */
+[data-testid="stAlert"] {
+    background-color: rgba(59,130,246,0.1) !important;
+    border: 1px solid rgba(59,130,246,0.3) !important;
+    border-radius: 8px !important;
+    color: #f0f0f5 !important;
+}
+[data-testid="stAlert"] * {
+    color: #f0f0f5 !important;
+}
+
+/* ── Date picker calendar popup ── */
+[data-baseweb="calendar"] {
+    background-color: #252836 !important;
+    color: #f0f0f5 !important;
+}
+[data-baseweb="calendar"] * {
+    background-color: #252836 !important;
+    color: #f0f0f5 !important;
+}
+
+/* ── Time picker ── */
+[data-testid="stTimeInput"] input {
+    background-color: #252836 !important;
+    color: #f0f0f5 !important;
+    border-color: rgba(108,99,255,0.2) !important;
+    border-radius: 8px !important;
 }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #0f1117; }
-::-webkit-scrollbar-thumb { background: rgba(108,99,255,0.4); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #6c63ff; }
+::-webkit-scrollbar-track { background-color: #0f1117 !important; }
+::-webkit-scrollbar-thumb { background-color: rgba(108,99,255,0.4) !important; border-radius: 3px !important; }
+::-webkit-scrollbar-thumb:hover { background-color: #6c63ff !important; }
+
+/* ── Markdown inside containers ── */
+.stMarkdown, .stMarkdown p, .stMarkdown span {
+    color: #f0f0f5 !important;
+}
+.stMarkdown strong {
+    color: #f0f0f5 !important;
+}
+code {
+    background-color: #252836 !important;
+    color: #8b85ff !important;
+    border-radius: 4px !important;
+    padding: 2px 6px !important;
+}
+
+/* ── Tab / multiselect if used ── */
+[data-baseweb="tab"] {
+    background-color: #1a1d2e !important;
+    color: #9b9bb4 !important;
+}
+[data-baseweb="tab"][aria-selected="true"] {
+    color: #8b85ff !important;
+    border-bottom-color: #6c63ff !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -416,7 +520,7 @@ def login_page():
             st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown("""
-        <div style="text-align:center; margin-top:24px; color:#6b6b80; font-size:0.8rem;">
+        <div style="text-align:center; margin-top:24px; color: #6b6b80; font-size: 0.8rem;">
             Contact your administrator if you need access.
         </div>
         """, unsafe_allow_html=True)
@@ -426,8 +530,8 @@ def login_page():
 def render_sidebar():
     with st.sidebar:
         st.markdown(f"""
-        <div style="padding:8px 0 20px;">
-            <div style="font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:#f0f0f5;">
+        <div style="padding: 8px 0 20px;">
+            <div style="font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-weight:700; color:#f0f0f5;">
                 📋 DAR Portal
             </div>
         </div>
@@ -487,19 +591,37 @@ def dashboard_page():
     in_prog   = len(reports_df[reports_df["Status"] == "In Progress"])  if "Status" in reports_df else 0
 
     if is_admin:
-        users_df    = get_all_users()
+        users_df = get_all_users()
         total_users = len(users_df) if users_df is not None else 0
-        today_str   = date.today().strftime("%Y-%m-%d")
+        today_str = date.today().strftime("%Y-%m-%d")
         today_reports = len(reports_df[reports_df["Date"].astype(str).str.startswith(today_str)]) if "Date" in reports_df else 0
 
         st.markdown(f"""
         <div class="metric-grid">
-            <div class="metric-card"><div class="metric-value">{total_users}</div><div class="metric-label">Total Employees</div></div>
-            <div class="metric-card"><div class="metric-value">{total}</div><div class="metric-label">Total Reports</div></div>
-            <div class="metric-card"><div class="metric-value">{today_reports}</div><div class="metric-label">Submitted Today</div></div>
-            <div class="metric-card"><div class="metric-value">{pending}</div><div class="metric-label">Pending</div></div>
-            <div class="metric-card"><div class="metric-value">{leave}</div><div class="metric-label">Leave Records</div></div>
-            <div class="metric-card"><div class="metric-value">{holiday}</div><div class="metric-label">Holiday Records</div></div>
+            <div class="metric-card">
+                <div class="metric-value">{total_users}</div>
+                <div class="metric-label">Total Employees</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{total}</div>
+                <div class="metric-label">Total Reports</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{today_reports}</div>
+                <div class="metric-label">Submitted Today</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{pending}</div>
+                <div class="metric-label">Pending</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{leave}</div>
+                <div class="metric-label">Leave Records</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{holiday}</div>
+                <div class="metric-label">Holiday Records</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -512,11 +634,26 @@ def dashboard_page():
     else:
         st.markdown(f"""
         <div class="metric-grid">
-            <div class="metric-card"><div class="metric-value">{total}</div><div class="metric-label">Total Reports</div></div>
-            <div class="metric-card"><div class="metric-value">{pending}</div><div class="metric-label">Pending</div></div>
-            <div class="metric-card"><div class="metric-value">{submitted}</div><div class="metric-label">Submitted</div></div>
-            <div class="metric-card"><div class="metric-value">{in_prog}</div><div class="metric-label">In Progress</div></div>
-            <div class="metric-card"><div class="metric-value">{leave}</div><div class="metric-label">Leave</div></div>
+            <div class="metric-card">
+                <div class="metric-value">{total}</div>
+                <div class="metric-label">Total Reports</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{pending}</div>
+                <div class="metric-label">Pending</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{submitted}</div>
+                <div class="metric-label">Submitted</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{in_prog}</div>
+                <div class="metric-label">In Progress</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{leave}</div>
+                <div class="metric-label">Leave</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -589,16 +726,16 @@ def report_form(existing=None):
         time_to = st.time_input("Time To", value=default_to)
 
     return {
-        "date":        report_date,
-        "task":        task,
-        "status":      status,
-        "director":    director,
-        "designer":    designer,
-        "project":     project,
+        "date": report_date,
+        "task": task,
+        "status": status,
+        "director": director,
+        "designer": designer,
+        "project": project,
         "new_project": new_project,
-        "notes":       notes,
-        "time_from":   time_from.strftime("%H:%M"),
-        "time_to":     time_to.strftime("%H:%M"),
+        "notes": notes,
+        "time_from": time_from.strftime("%H:%M"),
+        "time_to": time_to.strftime("%H:%M"),
     }
 
 
@@ -662,16 +799,17 @@ def my_reports_page():
             nav_to("submit")
         return
 
+    months = {
+        "All Months": None, "January": 1, "February": 2, "March": 3,
+        "April": 4, "May": 5, "June": 6, "July": 7,
+        "August": 8, "September": 9, "October": 10, "November": 11, "December": 12
+    }
+
     with st.expander("🔍 Search & Filter", expanded=True):
         fc1, fc2, fc3 = st.columns(3)
         with fc1:
             search_project = st.text_input("Search by Project", placeholder="Project name...")
         with fc2:
-            months = {
-                "All Months": None, "January": 1, "February": 2, "March": 3,
-                "April": 4, "May": 5, "June": 6, "July": 7,
-                "August": 8, "September": 9, "October": 10, "November": 11, "December": 12
-            }
             selected_month_name = st.selectbox("Filter by Month", list(months.keys()))
             search_month = months[selected_month_name]
         with fc3:
@@ -796,16 +934,17 @@ def all_reports_page():
         st.info("No reports have been submitted yet.")
         return
 
+    months = {
+        "All Months": None, "January": 1, "February": 2, "March": 3,
+        "April": 4, "May": 5, "June": 6, "July": 7,
+        "August": 8, "September": 9, "October": 10, "November": 11, "December": 12
+    }
+
     with st.expander("🔍 Search & Filter", expanded=True):
         fc1, fc2, fc3 = st.columns(3)
         with fc1:
             search_project = st.text_input("Search by Project", placeholder="Project name...")
         with fc2:
-            months = {
-                "All Months": None, "January": 1, "February": 2, "March": 3,
-                "April": 4, "May": 5, "June": 6, "July": 7,
-                "August": 8, "September": 9, "October": 10, "November": 11, "December": 12
-            }
             selected_month_name = st.selectbox("Filter by Month", list(months.keys()))
             search_month = months[selected_month_name]
         with fc3:
@@ -945,10 +1084,10 @@ def change_password_page():
     col1, col2 = st.columns([1, 1])
     with col1:
         with st.form("change_pw"):
-            current_pw  = st.text_input("Current Password", type="password")
-            new_pw      = st.text_input("New Password", type="password")
-            confirm_pw  = st.text_input("Confirm New Password", type="password")
-            submit      = st.form_submit_button("Update Password", use_container_width=True)
+            current_pw = st.text_input("Current Password", type="password")
+            new_pw = st.text_input("New Password", type="password")
+            confirm_pw = st.text_input("Confirm New Password", type="password")
+            submit = st.form_submit_button("Update Password", use_container_width=True)
 
         if submit:
             auth = authenticate_user(st.session_state.username, current_pw)
@@ -973,7 +1112,7 @@ def main():
 
     render_sidebar()
 
-    page     = st.session_state.page
+    page = st.session_state.page
     is_admin = st.session_state.role == "Admin"
 
     if page == "dashboard":
