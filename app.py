@@ -237,7 +237,7 @@ h1, h2, h3, h4, h5, h6 {
 [data-testid="stTimeInput"] [data-baseweb="select"] div[class*="placeholder"],
 [data-testid="stTimeInput"] [role="combobox"] *,
 [data-testid="stTimeInput"] span {
-    color: #111111 !important;
+    color: #ffffff !important;
 }
 .stTextInput > div > div > input::placeholder,
 .stTextArea > div > div > textarea::placeholder { color: #6b6b80 !important; }
