@@ -719,22 +719,23 @@ def my_reports_page():
         with fc2:
             # 1. Create a dictionary of month names and numbers
             months = {
-                "All Months": None, "January": 1, "February": 2, "March": 3, 
-                "April": 4, "May": 5, "June": 6, "July": 7, 
+                "All Months": None, "January": 1, "February": 2, "March": 3,
+                "April": 4, "May": 5, "June": 6, "July": 7,
                 "August": 8, "September": 9, "October": 10, "November": 11, "December": 12
             }
-        
-        # 2. Let the user choose the month
-        selected_month_name = st.selectbox("Filter by Month", list(months.keys()))
-        search_month = months[selected_month_name]
-        
-    with fc3:
-        status_filter = st.selectbox("Filter by Status", ["All"] + ["In Progress", "Submitted", "Pending", "Leave", "Holiday", "Correction"])
+            # 2. Let the user choose the month
+            selected_month_name = st.selectbox("Filter by Month", list(months.keys()))
+            search_month = months[selected_month_name]
+        with fc3:
+            status_filter = st.selectbox("Filter by Status", ["All"] + ["In Progress", "Submitted", "Pending", "Leave", "Holiday", "Correction"])
 
+        search_date = st.date_input("Filter by Date", value=None)
 
     filtered = reports_df.copy()
     if search_project:
         filtered = filtered[filtered["Project"].astype(str).str.contains(search_project, case=False, na=False)]
+    if search_month:
+        filtered = filtered[pd.to_datetime(filtered["Date"], errors="coerce").dt.month == search_month]
     if search_date:
         filtered = filtered[filtered["Date"].astype(str).str.startswith(str(search_date))]
     if status_filter != "All":
@@ -855,18 +856,28 @@ def all_reports_page():
         with fc2:
             # 1. Create a dictionary of month names and numbers
             months = {
-                "All Months": None, "January": 1, "February": 2, "March": 3, 
-                "April": 4, "May": 5, "June": 6, "July": 7, 
+                "All Months": None, "January": 1, "February": 2, "March": 3,
+                "April": 4, "May": 5, "June": 6, "July": 7,
                 "August": 8, "September": 9, "October": 10, "November": 11, "December": 12
             }
-        
-        # 2. Let the user choose the month
-        selected_month_name = st.selectbox("Filter by Month", list(months.keys()))
-        search_month = months[selected_month_name]
-        
+            # 2. Let the user choose the month
+            selected_month_name = st.selectbox("Filter by Month", list(months.keys()))
+            search_month = months[selected_month_name]
+        with fc3:
+            emp_list = ["All"] + sorted(reports_df["Username"].dropna().unique().tolist()) if "Username" in reports_df.columns else ["All"]
+            emp_filter = st.selectbox("Filter by Employee", emp_list)
+
+        fc4, fc5 = st.columns(2)
+        with fc4:
+            status_filter = st.selectbox("Filter by Status", ["All"] + ["In Progress", "Submitted", "Pending", "Leave", "Holiday", "Correction"])
+        with fc5:
+            search_date = st.date_input("Filter by Date", value=None)
+
     filtered = reports_df.copy()
     if emp_filter != "All":
         filtered = filtered[filtered["Username"] == emp_filter]
+    if search_month:
+        filtered = filtered[pd.to_datetime(filtered["Date"], errors="coerce").dt.month == search_month]
     if search_date:
         filtered = filtered[filtered["Date"].astype(str).str.startswith(str(search_date))]
     if search_project:
