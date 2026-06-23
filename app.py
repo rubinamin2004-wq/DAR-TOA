@@ -1071,6 +1071,7 @@ def manage_users_page():
 
 
 # ─── Change Password ──────────────────────────────────────────────────────────
+'''
 def change_password_page():
     st.markdown("""
     <div class="page-header">
@@ -1102,6 +1103,8 @@ def change_password_page():
                 set_message("✅ Password updated successfully!" if ok else "Failed to update password.",
                             "success" if ok else "error")
             st.rerun()
+
+            '''
 
 
 # ─── Main Router ──────────────────────────────────────────────────────────────
