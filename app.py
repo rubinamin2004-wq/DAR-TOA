@@ -217,13 +217,25 @@ h1, h2, h3, h4, h5, h6 {
 
 .stTextInput > div > div > input,
 .stTextArea > div > div > textarea,
-.stDateInput > div > div > input,
-.stTimeInput > div > div > input {
+.stDateInput > div > div > input {
     background-color: #252836 !important;
     color: #f0f0f5 !important;
     border-color: rgba(108,99,255,0.2) !important;
     border-radius: 8px !important;
     caret-color: #f0f0f5 !important;
+}
+/* ── Time inputs — white bg, black text ── */
+.stTimeInput > div > div > input,
+.stTimeInput > div > div > div,
+.stTimeInput input,
+.stTimeInput [data-baseweb="input"] input,
+[data-testid="stTimeInput"] input,
+[data-testid="stTimeInput"] div[data-baseweb="input"] input {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    border-color: rgba(108,99,255,0.3) !important;
+    border-radius: 8px !important;
+    caret-color: #111111 !important;
 }
 .stTextInput > div > div > input::placeholder,
 .stTextArea > div > div > textarea::placeholder { color: #6b6b80 !important; }
