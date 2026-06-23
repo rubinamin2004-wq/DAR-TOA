@@ -226,31 +226,18 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 8px !important;
     caret-color: #f0f0f5 !important;
 }
-/* ── Time inputs — white bg, black text ── */
-/* st.time_input renders as a select/dropdown internally */
-[data-testid="stTimeInput"] > div,
-[data-testid="stTimeInput"] > div > div,
+/* ── Time inputs — keep dark bg, force black text for visibility ── */
 [data-testid="stTimeInput"] [data-baseweb="select"] > div,
-[data-testid="stTimeInput"] [data-baseweb="select"] > div > div,
-[data-testid="stTimeInput"] [data-baseweb="base-input"],
-[data-testid="stTimeInput"] [data-baseweb="base-input"] > div,
-[data-testid="stTimeInput"] input,
-[data-testid="stTimeInput"] [role="combobox"],
-[data-testid="stTimeInput"] [role="combobox"] > div,
-[data-testid="stTimeInput"] span,
-.stTimeInput [data-baseweb="select"] > div,
-.stTimeInput [data-baseweb="select"] > div > div {
-    background-color: #ffffff !important;
+[data-testid="stTimeInput"] [data-baseweb="select"] > div > div {
+    background-color: #252836 !important;
     color: #111111 !important;
-    caret-color: #111111 !important;
 }
-/* The visible text value inside the time dropdown */
-[data-testid="stTimeInput"] [data-baseweb="select"] [data-id="select"],
-[data-testid="stTimeInput"] [data-baseweb="select"] div[class*="ValueContainer"] *,
 [data-testid="stTimeInput"] [data-baseweb="select"] div[class*="singleValue"],
-[data-testid="stTimeInput"] [data-baseweb="select"] div[class*="placeholder"] {
+[data-testid="stTimeInput"] [data-baseweb="select"] div[class*="ValueContainer"] *,
+[data-testid="stTimeInput"] [data-baseweb="select"] div[class*="placeholder"],
+[data-testid="stTimeInput"] [role="combobox"] *,
+[data-testid="stTimeInput"] span {
     color: #111111 !important;
-    background-color: #ffffff !important;
 }
 .stTextInput > div > div > input::placeholder,
 .stTextArea > div > div > textarea::placeholder { color: #6b6b80 !important; }
@@ -408,23 +395,12 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 50% !important;
 }
 
-/* ── Time input — white background, black text ── */
+/* ── Time input — dark bg, black text only ── */
 [data-testid="stTimeInput"] input {
-    background-color: #ffffff !important;
+    background-color: #252836 !important;
     color: #111111 !important;
-    border-color: rgba(108,99,255,0.3) !important;
+    border-color: rgba(108,99,255,0.2) !important;
     border-radius: 8px !important;
-}
-[data-testid="stTimeInput"] input::placeholder {
-    color: #888888 !important;
-}
-[data-baseweb="time-picker"] {
-    background-color: #ffffff !important;
-    color: #111111 !important;
-}
-[data-baseweb="time-picker"] * {
-    background-color: #ffffff !important;
-    color: #111111 !important;
 }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
