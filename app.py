@@ -13,6 +13,16 @@ from sheets import (
 
 import streamlit as st
 
+
+
+# ─── Page Config ───────────────────────────────────────────────────────────────
+st.set_page_config(
+    page_title="DAR Portal",
+    page_icon="📋",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 # Hide the upper header bar
 st.markdown(
     """
@@ -25,14 +35,6 @@ st.markdown(
     unsafe_made_html=True
 )
 
-
-# ─── Page Config ───────────────────────────────────────────────────────────────
-st.set_page_config(
-    page_title="DAR Portal",
-    page_icon="📋",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 # ─── CSS ───────────────────────────────────────────────────────────────────────
 st.markdown("""
