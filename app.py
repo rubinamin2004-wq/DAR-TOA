@@ -23,7 +23,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Hide the upper header bar
+import streamlit as st
+
 st.markdown(
     """
     <style>
@@ -32,8 +33,9 @@ st.markdown(
     }
     </style>
     """,
-    unsafe_made_html=True
+    unsafe_allow_html=True
 )
+
 
 
 # ─── CSS ───────────────────────────────────────────────────────────────────────
